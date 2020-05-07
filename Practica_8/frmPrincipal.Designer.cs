@@ -38,12 +38,12 @@
             this.CmdAgregar = new System.Windows.Forms.Button();
             this.TxtApellidos = new System.Windows.Forms.TextBox();
             this.TxtNombre = new System.Windows.Forms.TextBox();
-            this.TxtId = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.DgvPersonas = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TxtId = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPersonas)).BeginInit();
             this.SuspendLayout();
@@ -148,13 +148,6 @@
             this.TxtNombre.Size = new System.Drawing.Size(195, 20);
             this.TxtNombre.TabIndex = 20;
             // 
-            // TxtId
-            // 
-            this.TxtId.Location = new System.Drawing.Point(121, 126);
-            this.TxtId.Name = "TxtId";
-            this.TxtId.Size = new System.Drawing.Size(195, 20);
-            this.TxtId.TabIndex = 19;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -182,6 +175,15 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Nombre:";
             // 
+            // DgvPersonas
+            // 
+            this.DgvPersonas.BackgroundColor = System.Drawing.Color.White;
+            this.DgvPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvPersonas.Location = new System.Drawing.Point(22, 305);
+            this.DgvPersonas.Name = "DgvPersonas";
+            this.DgvPersonas.Size = new System.Drawing.Size(393, 150);
+            this.DgvPersonas.TabIndex = 26;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -191,14 +193,12 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Id:";
             // 
-            // DgvPersonas
+            // TxtId
             // 
-            this.DgvPersonas.BackgroundColor = System.Drawing.Color.White;
-            this.DgvPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvPersonas.Location = new System.Drawing.Point(22, 305);
-            this.DgvPersonas.Name = "DgvPersonas";
-            this.DgvPersonas.Size = new System.Drawing.Size(393, 150);
-            this.DgvPersonas.TabIndex = 26;
+            this.TxtId.Location = new System.Drawing.Point(121, 126);
+            this.TxtId.Name = "TxtId";
+            this.TxtId.Size = new System.Drawing.Size(195, 20);
+            this.TxtId.TabIndex = 19;
             // 
             // frmPrincipal
             // 
@@ -244,12 +244,12 @@
         private System.Windows.Forms.Button CmdAgregar;
         private System.Windows.Forms.TextBox TxtApellidos;
         private System.Windows.Forms.TextBox TxtNombre;
-        private System.Windows.Forms.TextBox TxtId;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DgvPersonas;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TxtId;
     }
 }
 

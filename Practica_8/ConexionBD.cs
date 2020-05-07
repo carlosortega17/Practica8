@@ -38,14 +38,14 @@ namespace Practica_8
             }
         }
         //Incertar datos en la base de datos
-        public string Insertar(int Id, string Nombre, string Apellido, string FechaNacimiento)
+        public string Insertar(string Nombre, string Apellido, string FechaNacimiento)
         {
             string salida = "Valor ingresado";
             try
             {
                 ConertarBD = new SqlConnection("Data Source=DESKTOP-AQ0I65S\\SQLEXPRESS;Initial Catalog=PracticaTAP;Integrated Security=True");
                 ConertarBD.Open();
-                cmd = new SqlCommand("insert into [Personas] values(" + Id + ",'" + Nombre + "','" + Apellido + "','" + FechaNacimiento + "')",ConertarBD);
+                cmd = new SqlCommand("insert into dbo.Persona (Nombre, Apellido, FechaNacimiento) values('" + Nombre + "','" + Apellido + "','" + FechaNacimiento + "')",ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos ingresados ");
             }
@@ -67,7 +67,7 @@ namespace Practica_8
             try
             {
                 //seleciona todos los datos de la tabla que este el id
-                cmd = new SqlCommand("Select * from Personas where Id=" + Id + "", ConertarBD);
+                cmd = new SqlCommand("Select * from dbo.Persona where Id=" + Id + "", ConertarBD);
                 //nos regresa el numero de personas que tenga un identificador 
                 dr = cmd.ExecuteReader();
                 //recorre el numero de veces que obtierne el registrO
@@ -87,7 +87,7 @@ namespace Practica_8
         {
             try
             {
-                da = new SqlDataAdapter("Select * from Personas", ConertarBD);
+                da = new SqlDataAdapter("Select * from dbo.Persona", ConertarBD);
                 dt = new DataTable();
                 da.Fill(dt);
                 DgvPersonas.DataSource = dt;
@@ -105,7 +105,7 @@ namespace Practica_8
         {
             try
             {
-                cmd = new SqlCommand("Select * from Personas where Id=" + id + "", ConertarBD);
+                cmd = new SqlCommand("Select * from dbo.Persona where Id=" + id + "", ConertarBD);
                 dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
@@ -127,7 +127,7 @@ namespace Practica_8
             string salida = "Se actualizaron los datos";
             try
             {
-                cmd = new SqlCommand("Update Personas set Nombre ='" + Nombre + "' ,Apellidos='" + Apellido + "', FechaNacimiento='" + FechaNacimiento + "' where Id=" + Id + "", ConertarBD);
+                cmd = new SqlCommand("Update dbo.Persona set Nombre ='" + Nombre + "' , Apellidos='" + Apellido + "', FechaNacimiento='" + FechaNacimiento + "' where Id=" + Id + "", ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos Actualizados ");
             }
@@ -142,7 +142,7 @@ namespace Practica_8
             string eliminar = "Se Eliminaron los Datos Correctamente";
             try
             {
-                cmd = new SqlCommand("delte from Personas where Id =" + Id + "", ConertarBD);
+                cmd = new SqlCommand("DELETE from dbo.Persona where Id =" + Id + "", ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos Actualizados ");
             }
