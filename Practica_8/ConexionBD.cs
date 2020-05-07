@@ -21,21 +21,16 @@ namespace Practica_8
         SqlDataAdapter da;
         DataTable dt;
 
-        //Conectamos y abrirmos la base de datos
-        public ConexionBD()
+        private void Conectar()
         {
-            try
+            if (ConertarBD != null)
             {
-                //se conectar ala base de datos
-                ConertarBD=new SqlConnection("Data Source=DESKTOP-AQ0I65S\\SQLEXPRESS;Initial Catalog=PracticaTAP;Integrated Security=True");
-                //se abre la base de datos
-                ConertarBD.Open();
-                //confirmacion de que fue abierta
+                ConertarBD = null;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se conecto con la base de datos: " + ex.ToString());
-            }
+            //se conectar ala base de datos
+            ConertarBD = new SqlConnection("Data Source=DESKTOP-AQ0I65S\\SQLEXPRESS;Initial Catalog=PracticaTAP;Integrated Security=True");
+            //se abre la base de datos
+            ConertarBD.Open();
         }
         //Incertar datos en la base de datos
         public string Insertar(string Nombre, string Apellido, string FechaNacimiento)
@@ -43,8 +38,7 @@ namespace Practica_8
             string salida = "Valor ingresado";
             try
             {
-                ConertarBD = new SqlConnection("Data Source=DESKTOP-AQ0I65S\\SQLEXPRESS;Initial Catalog=PracticaTAP;Integrated Security=True");
-                ConertarBD.Open();
+                Conectar();
                 cmd = new SqlCommand("insert into dbo.Persona (Nombre, Apellido, FechaNacimiento) values('" + Nombre + "','" + Apellido + "','" + FechaNacimiento + "')",ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos ingresados ");
@@ -66,6 +60,7 @@ namespace Practica_8
             int contador = 0;
             try
             {
+                Conectar();
                 //seleciona todos los datos de la tabla que este el id
                 cmd = new SqlCommand("Select * from dbo.Persona where Id=" + Id + "", ConertarBD);
                 //nos regresa el numero de personas que tenga un identificador 
@@ -76,6 +71,7 @@ namespace Practica_8
                     contador++;
                 }
                 dr.Close();
+                ConertarBD.Close();
             }
             catch (Exception ex)
             {
@@ -87,12 +83,14 @@ namespace Practica_8
         {
             try
             {
+                Conectar();
                 da = new SqlDataAdapter("Select * from dbo.Persona", ConertarBD);
                 dt = new DataTable();
                 da.Fill(dt);
                 DgvPersonas.DataSource = dt;
                 //Para auto ajustar los cuadros o celdas
                 //DgvPersonas.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                ConertarBD.Close();
             }
             catch (Exception ex)
             {
@@ -105,6 +103,7 @@ namespace Practica_8
         {
             try
             {
+                Conectar();
                 cmd = new SqlCommand("Select * from dbo.Persona where Id=" + id + "", ConertarBD);
                 dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -115,6 +114,7 @@ namespace Practica_8
 
                 }
                 dr.Close();
+                ConertarBD.Close();
             }
             catch (Exception ex)
             {
@@ -127,9 +127,11 @@ namespace Practica_8
             string salida = "Se actualizaron los datos";
             try
             {
+                Conectar();
                 cmd = new SqlCommand("Update dbo.Persona set Nombre ='" + Nombre + "' , Apellidos='" + Apellido + "', FechaNacimiento='" + FechaNacimiento + "' where Id=" + Id + "", ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos Actualizados ");
+                ConertarBD.Close();
             }
             catch (Exception ex)
             {
@@ -142,9 +144,11 @@ namespace Practica_8
             string eliminar = "Se Eliminaron los Datos Correctamente";
             try
             {
+                Conectar();
                 cmd = new SqlCommand("DELETE from dbo.Persona where Id =" + Id + "", ConertarBD);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show(" Datos Actualizados ");
+                ConertarBD.Close();
             }
             catch (Exception ex)
             {
